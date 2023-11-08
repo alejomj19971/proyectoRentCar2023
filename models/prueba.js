@@ -1,1 +1,0 @@
-//por favor borrar este archivo solo se utilizó para que git subiera la carpetas
