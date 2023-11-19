@@ -8,7 +8,7 @@ const ProductSchema = new mongoose.Schema({
     reservword: String,
     created:{
         type:Date,
-        default: Date.now,
+        default: Date.now(),
     }
 })
 

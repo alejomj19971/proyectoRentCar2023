@@ -7,7 +7,7 @@ const ProductSchema = new mongoose.Schema({
     dailyvalue:Number,
     created:{
         type:Date,
-        default: Date.now,
+        default: Date.now()
     }
 })
 

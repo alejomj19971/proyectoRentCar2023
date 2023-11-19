@@ -9,7 +9,7 @@ const ProductSchema = new mongoose.Schema({
     status:Boolean,
     created:{
         type:Date,
-        default: Date.now,
+        default: Date.now(),
     }
 })
 

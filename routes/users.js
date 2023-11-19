@@ -2,6 +2,7 @@ const express = require("express");
 const Users = require("../models/users");
 const router = express.Router();
 
+
 router.post("/registrar", async (req, res) => {
     let message = "";
     let error = false;
@@ -24,6 +25,21 @@ router.post("/registrar", async (req, res) => {
       });
   });
 
+  router.patch("/restablecercontrasena",async (req, res) => {
+    await Users.findOneAndUpdate(
+        { username: req.body.username, reservword: req.body.reservword },
+        { password: req.body.password }
+      ).then((user) => {
+        if (user) {
+          res.json({ message: "contraseña actualizada con exito" });
+        } else {
+          res.json({
+            message: "usuario o palabra reservada no valido, por favor verifique",
+          });
+        }
+      });
+});
+
   router.put("/updatecar", async (req, res) => {
     await Car.findOneAndUpdate(
       { platenumber: req.body.platenumber },
@@ -40,6 +56,7 @@ router.post("/registrar", async (req, res) => {
       }
     });
   });
+
   router.delete("/deletecar", async (req, res) => {
     await Car.findOneAndDelete({ platenumber: req.body.platenumber }).then(
       (car) => {
@@ -51,24 +68,18 @@ router.post("/registrar", async (req, res) => {
       }
     );
   });
+
   
-  router.get("/cardisponibles", async (req, res) => {
-    await Car.find({ state: true }).then((carros) => {
-      if (carros.length > 0) {
-        res.json(carros);
+  router.post("/login", async (req, res) => {
+    await Users.findOne({ username: req.body.username,password:req.body.password }).then((usuario) => {
+      if (usuario!=null) {
+        res.json(usuario);
       } else {
-        res.json({ message: "No existen vehiculos disponibles" });
-      }
-    });
-  });
-  router.get("/cardisnoponibles", async (req, res) => {
-    await Car.find({ state: false}).then((carros) => {
-      if (carros.length > 0) {
-        res.json(carros);
-      } else {
-        res.json({ message: "No existen vehiculos rentados" });
+        res.json({ message: "Usuario o contraseña invalidos" });
       }
     });
   });
 
+
+  
 module.exports = router;

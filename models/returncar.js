@@ -6,7 +6,7 @@ const ProductSchema = new mongoose.Schema({
     returndate:Date,
     created:{
         type:Date,
-        default: Date.now,
+        default: Date.now(),
     }
 })
 

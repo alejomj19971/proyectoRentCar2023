@@ -1,5 +1,5 @@
 const express = require("express");
-const Rent = require("../models/rent");
+const Rent = require("../models/rent")
 const router = express.Router();
 
 router.post("/rentarcar", async (req, res) => {
@@ -23,3 +23,5 @@ router.post("/rentarcar", async (req, res) => {
         }
       });
     });
+
+    module.exports = router;
